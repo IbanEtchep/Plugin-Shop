@@ -42,7 +42,7 @@ class PackageController extends Controller
     {
         $this->validate($request, [
             'quantity' => 'nullable|integer',
-            'price' => 'sometimes|nullable|numeric|min:'.$package->price,
+            'price' => 'sometimes|nullable|numeric|min:'.$package->getPrice(),
         ]);
 
         if ($package->isSubscription()) {
@@ -93,7 +93,7 @@ class PackageController extends Controller
         $this->validate($request, [
             ...$rules->all(),
             'quantity' => 'nullable|integer',
-            'price' => 'sometimes|nullable|numeric|min:'.$package->price,
+            'price' => 'sometimes|nullable|numeric|min:'.$package->getPrice(),
         ]);
 
         $checkboxes = $package->variables
