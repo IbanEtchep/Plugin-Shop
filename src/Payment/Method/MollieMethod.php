@@ -210,11 +210,11 @@ class MollieMethod extends PaymentMethod
     protected function findOrCreateCustomer(User $user): Customer
     {
         $customer = $this->findCustomer($user);
-        $data = [
+        $data = array_filter([
             'name' => $user->name,
-            'email' => $user->email,
+            'email' => shop_user_email($user),
             'metadata' => ['user_id' => $user->id],
-        ];
+        ]);
 
         if ($customer !== null) {
             $this->mollieClient()->customers->update($customer->id, $data);

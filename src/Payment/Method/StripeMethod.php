@@ -68,7 +68,7 @@ class StripeMethod extends PaymentMethod
 
         $session = Session::create([
             'mode' => 'payment',
-            'customer_email' => $payment->user->email,
+            'customer_email' => shop_user_email($payment->user),
             'line_items' => $items->all(),
             'success_url' => str_replace('%id%', '{CHECKOUT_SESSION_ID}', $successUrl),
             'cancel_url' => route('shop.cart.index'),
@@ -90,7 +90,7 @@ class StripeMethod extends PaymentMethod
 
         $session = Session::create([
             'mode' => 'subscription',
-            'customer_email' => $user->email,
+            'customer_email' => shop_user_email($user),
             'line_items' => [
                 [
                     'price_data' => [

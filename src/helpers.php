@@ -90,6 +90,17 @@ if (! function_exists('shop_cart')) {
     }
 }
 
+if (! function_exists('shop_user_email')) {
+    /**
+     * Get the email of the given user, only if this user is really logged in.
+     * Guest users (logged with only their name) must never get their email exposed.
+     */
+    function shop_user_email(User $user): ?string
+    {
+        return auth()->id() === $user->id ? $user->email : null;
+    }
+}
+
 if (! function_exists('shop_user')) {
     /**
      * Get the current user logged in the shop.

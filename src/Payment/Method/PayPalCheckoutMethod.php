@@ -111,9 +111,9 @@ class PayPalCheckoutMethod extends PaymentMethod
         $response = $this->getClient()->post('/v1/billing/subscriptions', [
             'custom_id' => $user->id.'|'.$package->id,
             'plan_id' => $planId,
-            'subscriber' => [
-                'email_address' => $user->email,
-            ],
+            'subscriber' => array_filter([
+                'email_address' => shop_user_email($user),
+            ]),
             'application_context' => [
                 'shipping_preference' => 'NO_SHIPPING',
                 'return_url' => route('shop.payments.success', $this->id),

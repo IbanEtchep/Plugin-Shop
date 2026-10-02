@@ -49,7 +49,7 @@ class MercadoPagoMethod extends PaymentMethod
                     ],
                 ],
                 'payer' => [
-                    'email' => $payment->user->email,
+                    'email' => shop_user_email($payment->user),
                 ],
                 'back_urls' => [
                     'success' => route('shop.payments.success', $this->id),
